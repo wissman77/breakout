@@ -1,6 +1,7 @@
 import turtle
 import random
 
+# initial constants for cfreating breaks
 X_INCREAMENT = 44
 Y_INCREAMENT = 22
 INITIAL_X = -310
@@ -11,6 +12,8 @@ y_move = 0
 score = 0
 lives = 3
 
+
+# creating all breaks instances and return a list
 def create_breaks():
     colors = ('red', 'red', 'orange', 'orange', 'green', 'green', 'yellow', 'yellow')
     breaks = []
@@ -30,6 +33,7 @@ def create_breaks():
     return breaks
 
 
+# creating a player instance
 def create_player():
     t = turtle.Turtle('square')
     t.up()
@@ -39,6 +43,8 @@ def create_player():
     t.shapesize(stretch_wid=1, stretch_len=5)
     return t
 
+
+# creating a ball instance
 def create_ball():
     global x_move, y_move
     t = turtle.Turtle('circle')
@@ -50,6 +56,8 @@ def create_ball():
     y_move = random.choice((4, 5, 6, 7, 8))
     return t
 
+
+# creating a score label instance
 def create_score():
     t = turtle.Turtle()
     t.hideturtle()
@@ -58,6 +66,8 @@ def create_score():
     t.color('white')
     return t
 
+
+# creating a lives label instance
 def create_lives():
     t = turtle.Turtle()
     t.hideturtle()
@@ -66,14 +76,20 @@ def create_lives():
     t.color('white')
     return t
 
+
+# moving the player paddle left
 def player_left():
     if player.xcor() > -270:
         player.setx(player.xcor() - 72)
 
+
+# moving the player paddle left
 def player_right():
     if player.xcor() < 270:
         player.setx(player.xcor() + 72)
 
+
+# increase speed every 10 breaks 
 def increase_speed():
     global x_move, y_move
     if score % 100 == 0 and score != 0:
@@ -87,6 +103,7 @@ def increase_speed():
         else:
             y_move += 1
 
+# game logic
 def play_game():
     global x_move, y_move, score, lives, ball
     score_t.clear()
@@ -148,6 +165,7 @@ while is_on:
     play_game()
     if lives == 0:
         is_on = False
+    # 3 breaks left is winning state 
     if len(breaks) == 3:
         is_winner = True
         is_on = False
